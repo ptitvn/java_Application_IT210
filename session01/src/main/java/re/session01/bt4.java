@@ -11,19 +11,29 @@ public class bt4 {
 //    Field Injection
 //
 //3. Bảng so sánh
-//    Tiêu chí	Constructor Injection	Field Injection
-//    Cách tiêm	Tiêm qua constructor, bắt buộc truyền dependency khi khởi tạo
-//    Tiêm trực tiếp vào biến bằng annotation (@Autowired)
-//    Đảm bảo dependency	Luôn có dependency ngay khi tạo object, tránh null
-//    Có thể null nếu container chưa inject hoặc inject lỗi
-//    Khả năng test (Unit Test)	Dễ test – có thể mock và truyền dependency
-//    khi khởi tạo	Khó test hơn – phải rely vào framework để inject
-//    Tính rõ ràng	Rõ ràng, dễ thấy dependency nào cần thiết
-//    Ít rõ ràng, dependency “ẩn” trong class
-//    Khả năng mở rộng	Tốt – dễ thêm dependency mới qua constructor
-//    Kém hơn – dễ gây khó khăn khi class phình to
-//    Xử lý lỗi (ví dụ SMS đứt kết nối)	Có thể thay thế dependency bằng
-//    mock hoặc fallback khi khởi tạo	Khó thay thế, vì dependency gắn chặt vào field
+//    Tiêu chí	|Constructor Injection	        | Field Injection
+
+//    Cách tiêm	| Tiêm qua constructor,         | Tiêm trực tiếp vào biến
+//              |bắt buộc truyền                |  bằng annotation (@Autowired)
+//              | dependency khi khởi tạo       |
+//
+//    Đảm bảo   | 	Luôn có dependency ngay khi |   Có thể null nếu container
+//    dependency|   tạo object, tránh null      |   chưa inject hoặc inject lỗi
+//
+//    Khả năng  | Dễ test – có thể mock và      | Khó test hơn – phải rely vào framework để inject
+//    test (Unit|truyền dependency khi khởi tạo |
+//    Test)
+//
+// Tính rõ ràng | Rõ ràng, dễ thấy dependency   |   Ít rõ ràng, dependency “ẩn” trong class
+//   	        |  nào cần thiết
+//
+//Khả năng      | Tốt – dễ thêm dependency mới qua | Kém hơn – dễ gây khó khăn khi class phình to
+//   mở rộng    | constructor mới qua constructor  |
+//
+//    Xử lý lỗi |	Có thể thay thế dependency bằng|    Khó thay thế, vì dependency gắn chặt vào field
+// (ví dụ SMS   |mock hoặc fallback khi khởi tạo   |
+// đứt kết nối) |                                  |
+//
 //
 //4. Phân tích bẫy dữ liệu
 //    Khi hệ thống SMS bị đứt kết nối:
