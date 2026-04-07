@@ -5,6 +5,6 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/session01" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/session02" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/session02/session02" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/session03/IT210_Java_Web_ss03" vcs="Git" />
   </component>
 </project>
