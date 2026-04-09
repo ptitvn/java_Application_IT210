@@ -13,7 +13,7 @@ public class DishService {
         return Arrays.asList(
                 new Dish(1, "Phở bò", 45000, true),
                 new Dish(2, "Bún chả", 40000, true),
-                new Dish(3, "Nem rán", 30000, false) // hết hàng
+                new Dish(3, "Nem rán", 30000, false)
         );
     }
 }
