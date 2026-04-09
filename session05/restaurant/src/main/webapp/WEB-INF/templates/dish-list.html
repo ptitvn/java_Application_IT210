@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách món ăn</title>
+    <style>
+        .out-of-stock { color: red; }
+        .available { color: green; }
+        .error { color: red; font-weight: bold; }
+        .success { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+<h1>Thực đơn nhà hàng</h1>
+
+<!-- Hiển thị thông báo lỗi nếu có -->
+<div th:if="${errorMessage}" class="error" th:text="${errorMessage}"></div>
+
+<!-- Hiển thị thông báo thành công nếu có -->
+<div th:if="${successMessage}" class="success" th:text="${successMessage}"></div>
+
+<!-- Nếu danh sách rỗng -->
+<div th:if="${#lists.isEmpty(dishes)}">
+    <p>Hiện tại nhà hàng đang cập nhật thực đơn, vui lòng quay lại sau</p>
+</div>
+
+<!-- Nếu có dữ liệu -->
+<table th:unless="${#lists.isEmpty(dishes)}" border="1">
+    <tr>
+        <th>ID</th>
+        <th>Tên món</th>
+        <th>Giá</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="dish : ${dishes}">
+        <td th:text="${dish.id}"></td>
+        <td th:text="${dish.name}"></td>
+        <td th:text="${dish.price}"></td>
+        <td th:classappend="${dish.available} ? 'available' : 'out-of-stock'"
+            th:text="${dish.available} ? 'Còn hàng' : 'Hết hàng'"></td>
+        <td>
+            <!-- Nút chỉnh sửa dẫn tới /bai3/edit/{id} -->
+            <a th:href="@{|/bai3/edit/${dish.id}|}">Chỉnh sửa</a>
+            <!-- Nút xóa (nếu muốn thêm chức năng delete) -->
+            <!-- <a th:href="@{|/bai3/delete/${dish.id}|}">Xóa</a> -->
+        </td>
+    </tr>
+</table>
+</body>
+</html>
