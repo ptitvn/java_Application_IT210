@@ -1,0 +1,62 @@
+<div layout:decorate="~{layout/main-layout}" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:layout="http://www.w3.org/1999/xhtml">
+    <div layout:fragment="content">
+        <div class="card p-3 mb-4 shadow-sm border-0">
+            <form th:action="@{/course/list}" method="get" class="row g-3">
+                <div class="col-md-5">
+                    <select name="level" class="form-select">
+                        <option value="">-- Chọn trình độ (Level) --</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="maxFee" class="form-control" placeholder="Học phí tối đa...">
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+        <div th:if="${#lists.isEmpty(courses)}" class="alert alert-warning text-center">
+            Hiện chưa có lớp học phù hợp với trình độ này.
+        </div>
+
+        <div class="table-responsive" th:if="${not #lists.isEmpty(courses)}">
+            <table class="table table-white table-striped shadow-sm">
+                <thead class="table-primary">
+                <tr>
+                    <th>Mã khóa</th>
+                    <th>Tên khóa</th>
+                    <th>Khai giảng</th>
+                    <th>Trình độ</th>
+                    <th>Học phí</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c : ${courses}">
+                    <td th:text="${c.code}" class="fw-bold"></td>
+                    <td th:text="${c.name}"></td>
+                    <td th:text="${#temporals.format(c.startDate, 'dd/MM/yyyy')}"></td>
+                    <td><span class="badge bg-info text-dark" th:text="${c.level}"></span></td>
+                    <td th:text="${#numbers.formatDecimal(c.fee, 0, 'POINT', 0, 'COMMA')} + ' VNĐ'"></td>
+                    <td>
+                        <a th:href="@{/course/detail/{code}(code=${c.code})}" class="btn btn-sm btn-info">Chi tiết</a>
+                        <a th:href="@{/course/edit/{code}(code=${c.code})}" class="btn btn-sm btn-warning">Sửa</a>
+                        <form th:action="@{/course/delete/{code}(code=${c.code})}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Xác nhận hủy?')">Hủy khóa</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

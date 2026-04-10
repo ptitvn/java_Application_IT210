@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Edu-Path | Chỉnh sửa khóa học</title>
+    <style>
+        .edit-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 0.5rem;
+        }
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s;
+        }
+        .form-control:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+        }
+        .form-control[readonly] {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            cursor: not-allowed;
+        }
+        .btn-save {
+            background: linear-gradient(45deg, #ffc107, #ff9800);
+            border: none;
+            color: #000;
+            font-weight: bold;
+            padding: 10px 30px;
+            border-radius: 50px;
+        }
+        .btn-save:hover {
+            background: linear-gradient(45deg, #ff9800, #ffc107);
+            transform: translateY(-2px);
+        }
+        .input-group-text {
+            background-color: #fff;
+            border-radius: 10px 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card edit-card shadow-lg">
+                    <div class="card-header bg-warning py-3 text-center">
+                        <h4 class="mb-0 fw-bold"><i class="fas fa-edit me-2"></i>CẬP NHẬT KHÓA HỌC</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/course/update}" th:object="${course}" method="post">
+                            <input type="hidden" th:field="*{code}">
+
+                            <div class="mb-4">
+                                <label class="form-label">Tên khóa học</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-bookmark text-warning"></i></span>
+                                    <input type="text" class="form-control" th:field="*{name}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Học phí (VNĐ)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-money-bill-wave text-success"></i></span>
+                                    <input type="number" class="form-control" th:field="*{fee}"
+                                           placeholder="Nhập số tiền..." required>
+                                </div>
+                                <div class="form-text">Thay đổi học phí áp dụng cho học viên mới.</div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Ngày khai giảng</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-calendar-alt text-danger"></i></span>
+                                    <input type="date" class="form-control" th:field="*{startDate}" required>
+                                </div>
+                                <div class="form-text">Chọn ngày dự kiến bắt đầu lớp học.</div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Số lượng học viên hiện tại</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-users text-primary"></i></span>
+                                    <input type="number" class="form-control" th:field="*{studentCount}" readonly>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/course/list}" class="btn btn-outline-secondary rounded-pill px-4">
+                                    <i class="fas fa-times me-2"></i>Hủy bỏ
+                                </a>
+                                <button type="submit" class="btn btn-save shadow">
+                                    <i class="fas fa-check me-2"></i>Lưu cập nhật
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

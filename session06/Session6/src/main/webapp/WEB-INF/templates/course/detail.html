@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Edu-Path | Chi tiết khóa học</title>
+    <style>
+        .course-card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .info-label {
+            color: #6c757d;
+            font-weight: 600;
+            width: 150px;
+            display: inline-block;
+        }
+        .status-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            transform: rotate(45deg);
+            width: 150px;
+            background: #dc3545;
+            color: white;
+            text-align: center;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+
+                <div class="card course-card shadow-lg border-0 position-relative">
+                    <div th:if="${course.isFull}" class="status-badge">HẾT CHỖ</div>
+
+                    <div class="card-header bg-dark text-white p-4">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle p-3 me-3">
+                                <i class="fas fa-book-open text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="mb-0 fw-bold" th:text="${course.name}">Tên khóa học</h2>
+                                <small class="text-info" th:text="'Mã: ' + ${course.code}"></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-5">
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h5 class="text-uppercase text-muted border-bottom pb-2 mb-3">Thông tin lộ trình</h5>
+                                <p class="lead" th:text="${course.description}">Lộ trình chi tiết của khóa học...</p>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-sm-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <span class="info-label"><i class="far fa-calendar-alt me-2"></i>Thời lượng:</span>
+                                    <span class="fw-bold" th:text="${course.duration} + ' tháng'"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <span class="info-label"><i class="fas fa-users me-2"></i>Học viên:</span>
+                                    <span class="fw-bold" th:text="${course.studentCount}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-light p-4 text-end">
+                        <a th:href="@{/course/list}" class="btn btn-outline-dark px-4 rounded-pill">
+                            <i class="fas fa-arrow-left me-2"></i>Quay lại danh sách
+                        </a>
+                        <a th:href="@{/course/edit/{code}(code=${course.code})}" class="btn btn-warning px-4 rounded-pill ms-2">
+                            <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
