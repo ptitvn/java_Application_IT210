@@ -1,4 +1,4 @@
-package com.restaurant.config;
+package com.restaurant.bai1.config;
 
 import com.restaurant.bai1.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -18,4 +18,5 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
 }
